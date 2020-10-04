@@ -1,2 +1,1 @@
-# sgNRIC2020
-
+# Singapore NRIC Barcode Generator
