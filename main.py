@@ -1,3 +1,5 @@
+import sys
+import shutil
 from flask import Flask, render_template, request, redirect
 from flask import *
 from flask import send_file, send_from_directory, safe_join, abort
@@ -6,7 +8,7 @@ import barcode
 from barcode.writer import ImageWriter
 from barcode.codex import Code39
 import os
-import shutil
+
 
 app = Flask(__name__, template_folder='templates') 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
