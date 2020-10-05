@@ -1,5 +1,8 @@
 # Singapore NRIC Barcode Generator
 Disclaimer: For educational purposes only. Used as a proof of concept.
+<p align="center">
+  <img src="https://github.com/bryanseah234/nric2003/blob/master/archive/nric2003.JPG" />
+</p>
 
 ## Demo:
 
