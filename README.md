@@ -4,9 +4,10 @@ Disclaimer: For educational purposes only. Used as a proof of concept.
   <img src="https://github.com/bryanseah234/sgNRIC2020/blob/main/static/NRIC.png" />
 </p>
 
-## Demo:
+## Demo
+https://sg-nric2020.herokuapp.com/
 
-## Frequently asked questions:
+## Frequently asked questions
 ### What’s a NRIC/FIN number?
 NRIC (National Registration Identity Card) is the identity document in use in Singapore. The NRIC number is a unique alpha-numeric serial number assigned to the document.
 
