@@ -4,9 +4,12 @@ from flask import Flask, render_template, request, redirect
 from flask import *
 from flask import send_file, send_from_directory, safe_join, abort
 from copy import copy
+from main import app as Application
 import barcode
 from barcode.writer import ImageWriter
 from barcode.codex import Code39
+
+web.config.debug = False
 import os
 
 
