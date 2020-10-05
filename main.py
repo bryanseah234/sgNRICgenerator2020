@@ -67,14 +67,15 @@ def is_nric_valid(nric):
 @app.route('/generate', methods=['GET'])
 def generate():
     if "nric" in request.args:
+        nric = request.args.get('nric')
+        print(nric)
+        nric = str(nric)
         path = os.path.join(app.root_path, 'static', 'image.png')
         delete_path = os.path.join(app.root_path, "static")
         filename = "image" 
         for i in os.listdir(delete_path):
             if i.startswith('image'):  # not to remove other images
                 os.remove(path)
-        nric = request.args.get('nric')
-        print(nric)
         if nric == '':
             error = '<Empty Input>'
             return render_template("index.html", error=error)
