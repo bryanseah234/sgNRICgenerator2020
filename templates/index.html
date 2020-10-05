@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv='cache-control' content='no-cache'> 
+        <meta http-equiv='expires' content='0'> 
+        <meta http-equiv='pragma' content='no-cache'> 
+        <title>
+            sgNRIC2020
+        </title>
+        <link href='https://fonts.googleapis.com/css?fam  ily=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            .input {
+                color: white;
+                text-align: center;
+            }
+            #form1{
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #form2{
+                max-width: 240px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 13px;
+            }
+            #button{
+                max-width: 100px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 13px;
+            }
+            .error {
+                color: white;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 300px;
+            }
+            h2 {
+                font-size: 40px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = input>
+            <h2>SINGAPORE NRIC BARCODE GENERATOR</h2>
+            <form id='form1' action='/generate' method='GET'>
+                <label><h3>Please input your NRIC number:</h3></label>
+                <input type="text" name='nric' maxlength="9">
+                <button id='button' type="submit" class="btn btn-primary btn-block btn-large">Generate</button>
+            </form>
+            <form id='form2' action='/' method='GET'>
+                <button id='button' type="submit" class="btn btn-primary btn-block btn-large">Refresh</button>
+            </form>
+        </div>
+        <div class = error>
+            {% if error is not none %}
+            <h3>{{ error }}</h3>
+            {% endif %}
+        </div>
+    </body>
+</html>
