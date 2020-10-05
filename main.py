@@ -80,6 +80,8 @@ def generate():
             error = '<Empty Input>'
             return render_template("index.html", error=error)
         elif is_nric_valid(nric) == True:
+            print(type(nric))
+            print(nric)
             code39 = Code39(nric, add_checksum = False, writer=barcode.writer.ImageWriter())
             os.chdir(delete_path)
             image = code39.save(filename)
