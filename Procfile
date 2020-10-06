@@ -1,1 +1,1 @@
-web: gunicorn -b :$8000 main:app
+web: gunicorn main:app --preload
