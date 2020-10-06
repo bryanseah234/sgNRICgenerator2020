@@ -1,2 +1,1 @@
-web: gunicorn main:app --preload
-init: python main.py
+web: gunicorn -b :$8000 main:app
