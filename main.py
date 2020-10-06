@@ -1,4 +1,5 @@
 import sys
+import os
 import shutil
 from flask import Flask, render_template, request, redirect
 from flask import *
@@ -6,9 +7,9 @@ from flask import send_file, send_from_directory, safe_join, abort
 from copy import copy
 from main import app as Application
 import barcode
+from barcode.charsets import code39
 from barcode.writer import ImageWriter
-from barcode.codex import Code39
-import os
+
 
 
 app = Flask(__name__, template_folder='templates') 
@@ -71,7 +72,6 @@ def is_nric_valid(nric):
 def generate():
     if "nric" in request.args:
         nric = request.args.get('nric')
-        print(nric)
         nric = str(nric)
         path = os.path.join(app.root_path, 'static', 'image.png')
         delete_path = os.path.join(app.root_path, "static")
@@ -83,9 +83,7 @@ def generate():
             error = '<Empty Input>'
             return render_template("index.html", error=error)
         elif is_nric_valid(nric) == True:
-            print(type(nric))
-            print(nric)
-            code39 = Code39(nric, add_checksum = False, writer=barcode.writer.ImageWriter())
+            code39 = barcode.Code39(nric, writer=ImageWriter(), add_checksum=False)
             os.chdir(delete_path)
             image = code39.save(filename)
             # a = os.path.abspath(image)
