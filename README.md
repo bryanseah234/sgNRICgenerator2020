@@ -1,5 +1,5 @@
 # Singapore NRIC Barcode Generator
-code to generate NRIC barcodes.
+code to create a website that generates NRIC barcodes.
 
 <p align="center">
   <img src="https://github.com/bryanseah234/sgNRIC2020/blob/main/static/NRIC.png" />
