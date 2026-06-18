@@ -11,7 +11,7 @@ from tqdm import tqdm
 import time
 from pathlib import Path
 
-from download_path_manager import prompt_for_download_path
+from path_manager import prompt_for_download_path
 from utils import is_nric_valid
 
 
