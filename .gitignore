@@ -1,0 +1,16 @@
+# Logs
+*.log
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project Specific
+barcodes/
+numbers/
+__pycache__/
+*.pyc
