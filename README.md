@@ -11,8 +11,8 @@ This repository contains tools to generate barcodes for Singapore National Regis
 > 2. FOR EDUCATIONAL PURPOSES ONLY
 
 ## Features
-- **Web Application (`main.py`)**: A Flask-based web interface to generate and display an NRIC barcode instantly in your browser. (Does not save images to disk to avoid race conditions).
-- **Offline CLI Generator (`generateNRICbarcode.py`)**: A command-line tool that allows you to locally generate and save barcode `.png` files. You can choose to generate a barcode for a single NRIC, all combinations for a specific year, or all combinations for a range of years.
+- **Web Application (`app.py`)**: A Flask-based web interface to generate and display an NRIC barcode instantly in your browser. (Does not save images to disk to avoid race conditions).
+- **Offline CLI Generator (`cli.py`)**: A command-line tool that allows you to locally generate and save barcode `.png` files. You can choose to generate a barcode for a single NRIC, all combinations for a specific year, or all combinations for a range of years.
 
 ## Installation
 
@@ -27,14 +27,14 @@ This repository contains tools to generate barcodes for Singapore National Regis
 ### 1. Web Application (Flask)
 To start the web server, run:
 ```bash
-python main.py
+python app.py
 ```
 Then, open your web browser and go to `http://localhost:5000`. You can enter an NRIC into the form and instantly see its barcode.
 
 ### 2. Offline CLI Generator
 To use the offline interactive generator, run:
 ```bash
-python generateNRICbarcode.py
+python cli.py
 ```
 You will be prompted with an interactive menu:
 1. **Generate for a specific NRIC**: Prompts you for a valid NRIC (e.g., `T0123456A`) and generates a single barcode image.
