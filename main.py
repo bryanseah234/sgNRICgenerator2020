@@ -1,103 +1,51 @@
-import sys
+import base64
+import io
 import os
-import shutil
-from flask import Flask, render_template, request, redirect
-from flask import *
-from flask import send_file, send_from_directory, safe_join, abort
-from copy import copy
-from main import app as Application
+from flask import Flask, render_template, request
 import barcode
-from barcode.charsets import code39
 from barcode.writer import ImageWriter
-
-
+from utils import is_nric_valid
 
 app = Flask(__name__, template_folder='templates') 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.after_request
-def add_header(r):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
-
-@app.after_request
 def add_header(response):
-    response.cache_control.max_age = 100
+    """
+    Add headers to prevent caching.
+    """
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
     return response
 
 @app.route('/', methods=['GET'])
 def root():
-    path = os.path.join(app.root_path, 'static', 'image.png')
-    delete_path = os.path.join(app.root_path, "static")
-    error = None
-    for i in os.listdir(delete_path):
-            if i.startswith('image'):  # not to remove other images
-                os.remove(path)
-    return render_template("index.html", error=error)
-
-def is_nric_valid(nric):
-    nricCheckDigits = 'JZIHGFEDCBA'
-    finCheckDigits = 'XWUTRQPNMLK'
-    weights = [2, 7, 6, 5, 4, 3, 2]
-    if len(nric) != 9:
-        return False
-
-    firstChar = nric[0].upper()
-    digits = nric[1:8]
-    lastChar = nric[8].upper()
-    
-    if firstChar not in "STFG" or not digits.isdigit():
-        return False
-
-    total = 0
-    if firstChar in "GT":
-        total += 4
-
-    for i in range(7):
-        total += int(digits[i]) * weights[i]
-
-    if firstChar in "ST":
-        return nricCheckDigits[total % 11] == lastChar
-
-    return finCheckDigits[total % 11] == lastChar
+    return render_template("index.html", error=None)
 
 @app.route('/generate', methods=['GET'])
 def generate():
     if "nric" in request.args:
-        nric = request.args.get('nric')
-        nric = str(nric)
-        path = os.path.join(app.root_path, 'static', 'image.png')
-        delete_path = os.path.join(app.root_path, "static")
-        filename = "image" 
-        for i in os.listdir(delete_path):
-            if i.startswith('image'):  # not to remove other images
-                os.remove(path)
-        if nric == '':
-            error = '<Empty Input>'
-            return render_template("index.html", error=error)
-        elif is_nric_valid(nric) == True:
+        nric = request.args.get('nric', '').strip().upper()
+        
+        if not nric:
+            return render_template("index.html", error='<Empty Input>')
+            
+        if is_nric_valid(nric):
+            # Generate the barcode image in memory instead of saving to disk
+            # This makes the app thread-safe and production-ready
+            rv = io.BytesIO()
             code39 = barcode.Code39(nric, writer=ImageWriter(), add_checksum=False)
-            os.chdir(delete_path)
-            image = code39.save(filename)
-            # a = os.path.abspath(image)
-            # b = delete_path
-            # shutil.move(a,b)
-            return render_template("barcode.html", nric=nric)
+            code39.write(rv)
+            
+            # Encode image to base64
+            image_base64 = base64.b64encode(rv.getvalue()).decode('utf-8')
+            
+            return render_template("barcode.html", nric=nric, image_base64=image_base64)
         else:
-            error = '<Invalid NRIC>'
-            check = True
-            return render_template("index.html", error=error)
-    else:
-        error = '<Empty Input>'
-        return render_template("index.html", error=error)
-
+            return render_template("index.html", error='<Invalid NRIC>')
+    
+    return render_template("index.html", error='<Empty Input>')
 
 if __name__ == '__main__':
-    app.run(debug=False, use_reloader=True)
+    app.run(debug=False)

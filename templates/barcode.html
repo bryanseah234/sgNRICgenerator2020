@@ -48,11 +48,11 @@
     <body>
         <h3>Your barcode for {{ nric }} is:</h3>
         <div >
-            {% if check is not none %}
-            <img id = image src="static\image.png" style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+            {% if image_base64 %}
+            <img id="image" src="data:image/png;base64,{{ image_base64 }}" style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
             {% endif %}
         </div>
-        <div class = input>
+        <div class="input">
             <form id='form' action='/' method='GET'>
                 <button id='button' type="submit" class="btn btn-primary btn-block btn-large">Generate again</button>
             </form>
