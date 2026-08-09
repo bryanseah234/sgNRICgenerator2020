@@ -44,3 +44,10 @@ skills/
 skills-lock.json
 docs/
 templates/
+.env
+.env.*
+node_modules/
+dist/
+build/
+.next/
+.pytest_cache/
