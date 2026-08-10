@@ -58,3 +58,7 @@ The barcode is generated using the `python-barcode` module (Code 39). However, t
 
 ### Is this legal?
 The generation of NRIC numbers itself is legal, as the algorithm is made public. This codebase serves to demonstrate that it is possible to do so. However, you should not use the NRIC numbers to impersonate anyone as it is an offence. By using this tool to generate/copy NRIC/FIN numbers, you hereby agree to be responsible for your actions and waive all your rights to hold the author liable for any problems arising from your actions.
+
+## License
+
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
