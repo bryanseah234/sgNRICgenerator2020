@@ -1,5 +1,10 @@
 # Singapore NRIC Barcode Generator
 
+Live demo: https://hongyime.github.io/sgNRICgenerator65/
+
+![Project screenshot](./screenshot.png)
+
+
 This repository contains tools to generate barcodes for Singapore National Registration Identity Cards (NRIC). It includes both an interactive command-line application for offline generation and a web application for on-the-fly generation.
 
 <p align="center">
