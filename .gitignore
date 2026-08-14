@@ -15,9 +15,24 @@ numbers/
 __pycache__/
 *.pyc
 
+templates/
+.env
+.env.*
+node_modules/
+dist/
+build/
+.next/
+.pytest_cache/
+
 # AI / editor dot directories (managed via sourcerepo)
 .*
 !.github/
+!.agents/
+.agents/*
+!.agents/STATE.md
+!.agents/JOURNAL.md
+!.agents/handoffs/
+!.agents/handoffs/**
 !.gitignore
 !.gitattributes
 !.gitmodules
@@ -43,11 +58,4 @@ __pycache__/
 skills/
 skills-lock.json
 docs/
-templates/
-.env
-.env.*
-node_modules/
-dist/
-build/
-.next/
-.pytest_cache/
+# End AI / editor dot directories (managed via sourcerepo)
